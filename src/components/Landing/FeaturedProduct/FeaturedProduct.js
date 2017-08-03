@@ -1,6 +1,7 @@
 import React, { PropTypes } from "react";
 
 import "./FeaturedProduct.css";
+import { Link } from 'react-router-dom';
 
 export default function FeaturedProduct( { addToCart, description, logo, name, onSale, price } ) {
 	return (
@@ -9,18 +10,20 @@ export default function FeaturedProduct( { addToCart, description, logo, name, o
 				<img
 					alt={ `${ name } logo` }
 					className="featured-product__logo"
-					src={ "" /* product logo */ }
+					src={ logo }
 				/>
-				<h3 className="featured-product__name">{ /* product name */ }</h3>
+				<Link to={`details/${name}`}>
+					<h3 className="featured-product__name">{ name }</h3>
+				</Link>
 			</div>
-			<p className="featured-product__description">{ /* product description */ }</p>
+			<p className="featured-product__description">{ description }</p>
 			<div className="featured-product__buy-wrapper">
-				<p className="featured-product__price-reduced">Price Reduced!</p>
+				{onSale ? <p className="featured-product__price-reduced">Price Reduced!</p> : ''}
 				<button
 					className="featured-product__buy"
 					onClick={ addToCart }
 				>
-					${ /* product price */ }
+					${ price }
 				</button>
 			</div>
 		</div>
